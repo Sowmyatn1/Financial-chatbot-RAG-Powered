@@ -85,7 +85,8 @@ history_aware_retriever = create_history_aware_retriever(
 
 # now retrrival is done .lets move on to generation phase of the RAG
 #below code we are generating human understandalbe answers for the user question with the documents we retrived
-#for that first lets prepare the prompt
+#for that first lets prepare the prompt.the {context} here wil, have the ducumetns fetched by the history_aware_retriever.
+#we are not writing explictyly the stuffing of the docs here its done automatically
 
 system_prompt = (
     "You are an AI assistant specializing in financial insights. "
@@ -95,6 +96,7 @@ system_prompt = (
     "\n\n"
     "{context}"
 )
+
 
 # put the prompt in a template to make sure LLM to understand it 
 qa_prompt = ChatPromptTemplate.from_messages(
