@@ -110,9 +110,19 @@ qa_prompt = ChatPromptTemplate.from_messages(
 #2. The user query (or rewritten query)
 
 # below line is Question-answer chain
+#This does not contain documents yet.It only defines how to use documents once they are available:
+#It formats the prompt template (qa_prompt)
+#It knows it will “stuff” documents into the {context} placeholder
+#Think of it like a recipe: it says “here’s how to combine documents + query into a prompt for the LLM,” but the ingredients (documents) are not provided yet.
+
 question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
 
 #below line is full rag chain(chain here means not maintaining any chain of thoughts r anything it a name representing its works like a pipe line of retrival->generatior)
+#history_aware_retriever fetches the relevant documents.
+#The fetched documents are automatically passed into question_answer_chain.
+#question_answer_chain fills the {context} placeholder in qa_prompt with the documents.
+#LLM generates the answer using the combined prompt.
+
 rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
      
 
