@@ -34,7 +34,7 @@ document=extract_htmlcode('/content/drive/My Drive/GenAI10K/10KAnalysis.html')
 Embeddings = OpenAIEmbeddings()
 #we are using FIASS vector store here
 vector_store = FAISS.from_texts([document], Embeddings)
-#create retriver
+#create retriver.you will be using this retriver in line number 82 while you create_history_aware_retriever
 retriever=vector_store.as_retriever()  
 #create instance of LLM
 llm=ChatOpenAI( model_name="gpt-3.5-turbo",temperature=0)
